@@ -97,7 +97,7 @@ export function CalibrationScrub({
 
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   /* Footage dims and the card assembles over the last sixth. */
-  const scrimOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 0.72], { clamp: true });
+  const scrimOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 0.88], { clamp: true });
   const cardOpacity = useTransform(scrollYProgress, [0.86, 0.95], [0, 1], { clamp: true });
   const cardY = useTransform(scrollYProgress, [0.86, 0.97], [40, 0], { clamp: true });
 
@@ -225,7 +225,9 @@ export function CalibrationScrub({
               : { opacity: cardOpacity, y: cardY, pointerEvents: "none" }
           }
         >
-          <div className="w-full max-w-[560px] border border-line-strong bg-raised/80 p-7 backdrop-blur-md lg:p-9">
+          {/* Near-solid: the resolve frame carries a bright rim light and a
+              translucent card loses its numbers against it. */}
+          <div className="w-full max-w-[560px] border border-line-strong bg-raised/95 p-7 backdrop-blur-xl lg:p-9">
             <div className="flex items-baseline justify-between gap-4">
               <span className="font-mono text-step-n1 tracking-[0.2em] text-ink/55 uppercase">
                 SB-01
