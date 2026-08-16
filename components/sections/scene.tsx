@@ -28,7 +28,7 @@ export function Scene() {
         className="absolute inset-0 -top-[10%] -bottom-[10%]"
       >
         <Image
-          src={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/scene.png"}
+          src="/renders/scene.png"
           alt={site.scene.alt}
           width={2688}
           height={1536}

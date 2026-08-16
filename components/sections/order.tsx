@@ -75,7 +75,7 @@ export function Order() {
               <div className="card-sheen overflow-hidden rounded-lg border border-line">
                 <div className="relative h-44 overflow-hidden border-b border-line">
                   <Image
-                    src={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/hero.png"}
+                    src="/renders/hero.png"
                     alt="SB-01 earphones and charge case, graphite"
                     width={1792}
                     height={2304}

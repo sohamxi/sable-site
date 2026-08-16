@@ -15,7 +15,9 @@ import Image from "next/image";
    Reduced motion renders the plain image. */
 
 const STRIPS = 8;
-const SRC = (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/exploded.png";
+const SRC = "/renders/exploded.png";
+// Raw CSS url() is not touched by the next/image loader, so prefix it here.
+const SRC_RAW = (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + SRC;
 
 function Strip({
   index,
@@ -35,7 +37,7 @@ function Strip({
         y,
         top: `${(index * 100) / STRIPS}%`,
         height: `${100 / STRIPS}%`,
-        backgroundImage: `url(${SRC})`,
+        backgroundImage: `url(${SRC_RAW})`,
         backgroundSize: `100% ${STRIPS * 100}%`,
         backgroundPosition: `0% ${(index * 100) / (STRIPS - 1)}%`,
       }}

@@ -100,7 +100,7 @@ export function Hero() {
             >
               <Reveal delay={0.2}>
                 <Image
-                  src={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/hero.png"}
+                  src="/renders/hero.png"
                   alt="SB-01 earphones above their open charge case, graphite, amber rim light"
                   width={1792}
                   height={2304}

@@ -75,7 +75,7 @@ export function Flagship() {
           <div className="relative lg:hidden">
             <div aria-hidden className="glow-warm absolute -inset-4" />
             <Image
-              src={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/exploded.png"}
+              src="/renders/exploded.png"
               alt="Exploded view of the SB-01 earbud: grille, mic array, shell halves, driver, radio board and cell separated along one axis"
               width={1536}
               height={2688}
@@ -121,7 +121,7 @@ export function Flagship() {
         <Reveal className="mt-20">
           <figure className="relative overflow-hidden rounded-lg border border-line">
             <Image
-              src={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/macro.png"}
+              src="/renders/macro.png"
               alt="Macro of the SB-01 touch plate: fine concentric machined grooves circling the mesh grille"
               width={2432}
               height={1792}
