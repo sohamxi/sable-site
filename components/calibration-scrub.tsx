@@ -46,7 +46,7 @@ const CHAPTERS = [
   {
     index: "04",
     label: "THE QUIET",
-    line: "Then he takes it out.",
+    line: "Then most of it is simply gone.",
     stat: "42 dB",
     note: "attenuation at 1 kHz, worn",
     at: [0.78, 0.92] as const,
