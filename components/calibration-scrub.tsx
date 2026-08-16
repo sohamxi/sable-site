@@ -110,13 +110,16 @@ export function CalibrationScrub({
      progress: past progress 1 the scroll-linked values drop back to their
      start, which blanked the card while it was still on screen. */
   const [resolved, setResolved] = useState(false);
+  const resolvedRef = useRef(false);
   const sentinel = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sentinel.current;
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => {
-        setResolved(entry.isIntersecting || entry.boundingClientRect.top < 0);
+        const on = entry.isIntersecting || entry.boundingClientRect.top < 0;
+        resolvedRef.current = on;
+        setResolved(on);
       },
       { threshold: 0 },
     );
@@ -132,6 +135,7 @@ export function CalibrationScrub({
 
   useEffect(() => {
     if (reduced) {
+      resolvedRef.current = true;
       const img = new Image();
       img.onload = () => {
         images.current[0] = img;
@@ -160,6 +164,16 @@ export function CalibrationScrub({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced]);
 
+  /* Mirrors the CSS card metrics so the frame is composed inside the
+     media window once resolved, instead of being a magnified centre crop
+     of a viewport-sized draw. */
+  function cardBox(w: number, h: number) {
+    const bw = Math.min(560, 0.88 * w);
+    const bh = bw * 0.5625;
+    const panel = w <= 640 ? 296 : 268;
+    return { x: (w - bw) / 2, y: (h - bh - panel) / 2, w: bw, h: bh };
+  }
+
   function draw(index: number) {
     const c = canvas.current;
     const img = images.current[index] ?? images.current[0];
@@ -174,10 +188,19 @@ export function CalibrationScrub({
       c.height = h * dpr;
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const scale = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    ctx.clearRect(0, 0, w, h);
+    const box = resolvedRef.current
+      ? cardBox(w, h)
+      : { x: 0, y: 0, w, h };
+    const scale = Math.max(box.w / img.naturalWidth, box.h / img.naturalHeight);
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
-    ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(box.x, box.y, box.w, box.h);
+    ctx.clip();
+    ctx.drawImage(img, box.x + (box.w - dw) / 2, box.y + (box.h - dh) / 2, dw, dh);
+    ctx.restore();
   }
 
   useMotionValueEvent(scrollYProgress, "change", (p) => {
@@ -190,8 +213,8 @@ export function CalibrationScrub({
      past progress 1, and the media window should show the product rather
      than whatever frame the sweep happened to stop on. */
   useEffect(() => {
-    if (!resolved) return;
-    const id = window.setTimeout(() => draw(FRAMES - 1), 60);
+    resolvedRef.current = resolved;
+    const id = window.setTimeout(() => draw(resolved ? FRAMES - 1 : 0), 60);
     return () => window.clearTimeout(id);
   }, [resolved]);
 

@@ -210,8 +210,8 @@
   --card-w: min(560px, 88vw);
   --card-media-h: calc(var(--card-w) * 0.5625);
   --card-panel-h: 268px;
-  --card-top: calc((100svh - var(--card-media-h) - var(--card-panel-h)) / 2);
-  --card-x: calc((100vw - var(--card-w)) / 2);
+  --card-top: calc((100% - var(--card-media-h) - var(--card-panel-h)) / 2);
+  --card-x: calc((100% - var(--card-w)) / 2);
 }
 
 @media (max-width: 640px) {
@@ -223,7 +223,7 @@
 .sable-journey .journey-clipped {
   clip-path: inset(
     var(--card-top) var(--card-x)
-    calc(100svh - var(--card-top) - var(--card-media-h)) var(--card-x)
+    calc(100% - var(--card-top) - var(--card-media-h)) var(--card-x)
   );
 }
 
