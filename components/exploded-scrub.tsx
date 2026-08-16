@@ -15,7 +15,7 @@ import Image from "next/image";
    Reduced motion renders the plain image. */
 
 const STRIPS = 8;
-const SRC = "/renders/exploded.png";
+const SRC = (process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/renders/exploded.png";
 
 function Strip({
   index,
