@@ -52,12 +52,19 @@ const CHAPTERS = [
   },
 ];
 
+/* Offsets must stay inside 0..1 and never decrease: Motion compiles these
+   ranges into Web Animations keyframes, and one out-of-range value throws
+   during hydration and takes the whole tree with it. */
 function useChapterOpacity(p: MotionValue<number>, at: readonly [number, number]) {
   const [s, e] = at;
   const fade = 0.035;
-  return useTransform(p, [s - fade, s + fade, e - fade, e + fade], [0, 1, 1, 0], {
-    clamp: true,
-  });
+  const pts = [s - fade, s + fade, e - fade, e + fade].map((v) =>
+    Math.min(1, Math.max(0, v)),
+  );
+  for (let i = 1; i < pts.length; i++) {
+    if (pts[i] < pts[i - 1]) pts[i] = pts[i - 1];
+  }
+  return useTransform(p, pts, [0, 1, 1, 0], { clamp: true });
 }
 
 /**
