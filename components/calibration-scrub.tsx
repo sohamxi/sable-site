@@ -223,14 +223,16 @@ export function CalibrationScrub({
               </motion.g>
             )}
 
-            <g className="font-mono" fill="rgba(237,237,234,0.5)" fontSize="11" letterSpacing="0.04em">
+            {/* Tick labels render below ~11px on phones, where they read as
+                noise rather than data — the trace and corridor carry it. */}
+            <g className="hidden font-mono sm:block" fill="rgba(237,237,234,0.5)" fontSize="11" letterSpacing="0.04em">
               <text x="54" y="28" textAnchor="end">+1.0</text>
               <text x="54" y="81" textAnchor="end">+0.5</text>
               <text x="54" y="134" textAnchor="end">0 dB</text>
               <text x="54" y="187" textAnchor="end">-0.5</text>
               <text x="54" y="240" textAnchor="end">-1.0</text>
             </g>
-            <g className="font-mono" fill="rgba(237,237,234,0.5)" fontSize="11" letterSpacing="0.04em" textAnchor="middle">
+            <g className="hidden font-mono sm:block" fill="rgba(237,237,234,0.5)" fontSize="11" letterSpacing="0.04em" textAnchor="middle">
               {X_TICKS.map(([x, label]) => (
                 <text key={label} x={x} y="262">{label}</text>
               ))}
@@ -245,12 +247,12 @@ export function CalibrationScrub({
             </g>
           </motion.svg>
 
-          <div className="mt-4 flex items-baseline justify-between gap-4">
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-mono text-[0.72rem] tracking-[0.16em] text-ink/50 uppercase">
               {caption}
             </span>
             {!reduced && (
-              <span className="font-led text-step-1 leading-none text-accent tabular-nums">
+              <span className="font-led text-step-1 leading-none whitespace-nowrap text-accent tabular-nums">
                 <span ref={readout}>20 Hz</span>
               </span>
             )}
