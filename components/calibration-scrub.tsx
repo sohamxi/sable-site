@@ -38,8 +38,9 @@ const CHAPTERS = [
     index: "03",
     label: "THE NOISE",
     line: "Bengaluru at six in the evening.",
-    stat: "19 µs",
-    note: "six microphones close the loop this often",
+    /* No micro sign here: CSS uppercase renders it as a capital Mu. */
+    stat: "6 mics",
+    note: "closing the loop every 19 microseconds",
     at: [0.43, 0.78] as const,
   },
   {
@@ -52,13 +53,15 @@ const CHAPTERS = [
   },
 ];
 
-/* Offsets must stay inside 0..1 and never decrease: Motion compiles these
-   ranges into Web Animations keyframes, and one out-of-range value throws
+/* Each chapter clears the frame before the next arrives: the windows sit
+   strictly inside the chapter's own range, so two lines never share the
+   same space and print over each other.
+   Offsets must also stay inside 0..1 and never decrease — Motion compiles
+   these into Web Animations keyframes, and one out-of-range value throws
    during hydration and takes the whole tree with it. */
 function useChapterOpacity(p: MotionValue<number>, at: readonly [number, number]) {
   const [s, e] = at;
-  const fade = 0.035;
-  const pts = [s - fade, s + fade, e - fade, e + fade].map((v) =>
+  const pts = [s + 0.005, s + 0.05, e - 0.05, e - 0.005].map((v) =>
     Math.min(1, Math.max(0, v)),
   );
   for (let i = 1; i < pts.length; i++) {
