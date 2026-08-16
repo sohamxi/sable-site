@@ -1,0 +1,190 @@
+{
+  "url": "http://localhost:3210",
+  "timestamp": "2026-08-14T08:12:25.320Z",
+  "counts": {
+    "critical": 0,
+    "warning": 1,
+    "pass": 14
+  },
+  "gate": "AUDIT PASS",
+  "findings": [
+    {
+      "level": "pass",
+      "check": "console",
+      "detail": "No console errors",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.desktop",
+      "detail": "No horizontal overflow at 1440px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "typography.banned-font",
+      "detail": "Fonts in use: satoshi, handjet, geistmono",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "typography.scale",
+      "detail": "h1 is 13.41x body",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "color.contrast",
+      "detail": "All sampled text pairs pass AA",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "color.ramp",
+      "detail": "8 distinct colours rendered",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "copy.banned-words",
+      "detail": "No banned copy words",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "a11y.h1",
+      "detail": "Exactly one h1",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "a11y.focus",
+      "detail": "Focus styles present",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.grain",
+      "detail": "Grain present at 0.04 (soft-light)",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.cursor",
+      "detail": "Custom cursor overlay present",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.tablet",
+      "detail": "No horizontal overflow at 768px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.mobile",
+      "detail": "No horizontal overflow at 390px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.cursor.touch",
+      "detail": "Custom cursor correctly absent on touch",
+      "evidence": null
+    },
+    {
+      "level": "warning",
+      "check": "a11y.touch-targets",
+      "detail": "1 target(s) under 44x44px on mobile",
+      "evidence": null
+    }
+  ],
+  "raw": {
+    "fonts": [
+      "satoshi",
+      "handjet",
+      "geistmono"
+    ],
+    "headings": [
+      {
+        "level": 1,
+        "text": "SB-01SB-567890678901Earphones, measured.",
+        "fontSize": 179.52,
+        "lineHeight": "161.568px",
+        "letterSpacing": "-3.5904px"
+      },
+      {
+        "level": 2,
+        "text": "Sealed. Silenced. Certified.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 3,
+        "text": "Quiet you can verify",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Sized for the low end",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Weight the ear ignores",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Two days between docks",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Close to the wire",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 2,
+        "text": "Four instruments. One discipline.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 2,
+        "text": "Every unit measured. No golden samples.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 2,
+        "text": "SB-01, from the line to you.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      }
+    ],
+    "distinctColors": 8,
+    "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true,
+      "sections": 5,
+      "skipLink": true
+    }
+  }
+}

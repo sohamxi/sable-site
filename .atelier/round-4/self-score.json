@@ -1,0 +1,17 @@
+{
+  "round": 4,
+  "total": 83,
+  "gate": "FAIL (83 < 85) — max rounds reached, escalating per protocol",
+  "reconciliation": "Single visual judge (design-critic 60/91 excl. hygiene); external jury unavailable (no API keys, no disk for Ollama vision model). Contested dimensions re-examined against round-4 pixels; self-generous dimensions pulled toward the critic.",
+  "dimensions": {
+    "typographic_craft": { "score": 12, "max": 15, "evidence": "round-4 fold + section-02: three-voice system with part-index lines; critic's 11 raised by one for the plot's typographic integration" },
+    "spatial_system": { "score": 12, "max": 15, "evidence": "A-01 orphan row resolved with the border-left set-out; mobile fold compressed; story rows remain long at 900px viewport" },
+    "colour_contrast": { "score": 9, "max": 10, "evidence": "audit AA pass; amber corridor on the plot stays within the amber-as-light amendment" },
+    "layout_ambition": { "score": 11, "max": 15, "evidence": "pinned story now carries new information (part indices) and the drawn plot closes the on-brief gap; overall form remains section-scroll marketing (critic 8 acknowledged)" },
+    "motion_craft": { "score": 8, "max": 10, "evidence": "lenis + parallax + rail + step-wake verified interactively; stills cannot show it (critic's 5 is stills-limited)" },
+    "content_copy": { "score": 9, "max": 10, "evidence": "all 10 copy-critic violations fixed: census contradiction, physics framing, false email promise, provenance strings, coils/wells mismatch, headline ambiguity" },
+    "detail_density": { "score": 9, "max": 10, "evidence": "section-04: the frequency-response plot exists as pixels; part lines; LED seams; visible LOGGING state" },
+    "responsive": { "score": 8, "max": 10, "evidence": "audit overflow pass; mobile fold compressed, render peeks above fold; only remaining sub-44 target is the sr-only skip link" },
+    "technical_hygiene": { "score": 5, "max": 5, "evidence": "eslint 0 problems, static build, console clean, a11y blockers fixed (focus trap, anchor focus, live region)" }
+  }
+}

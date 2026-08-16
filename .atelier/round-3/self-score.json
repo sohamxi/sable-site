@@ -1,0 +1,16 @@
+{
+  "round": 3,
+  "total": 88,
+  "gate_self": "PASS pending panel + expectation",
+  "dimensions": {
+    "typographic_craft": { "score": 13, "max": 15, "evidence": "desktop--fold: Satoshi 300 monumental + Handjet LED values + mono labels, distinct three-voice system; nit: LED step-5 values slightly outrank h3 heads in story rows (section-02 shot)" },
+    "spatial_system": { "score": 13, "max": 15, "evidence": "section-03: 2-1-1 grid even; story rows rem-based and consistent; long quiet stretches in story rows are deliberate but borderline at 900px" },
+    "colour_contrast": { "score": 9, "max": 10, "evidence": "round-3 audit color.contrast pass (0 failures); accent discipline held; ramp warning cosmetic (gradients)" },
+    "layout_ambition": { "score": 12, "max": 15, "evidence": "observations 2: four stack-breaks incl. pinned story; overall form remains section-scroll marketing" },
+    "motion_craft": { "score": 9, "max": 10, "evidence": "lenis + hero parallax + pinned story + odometer; whileInView frame-zero fragility only under artificial capture" },
+    "content_copy": { "score": 9, "max": 10, "evidence": "audit copy pass; decision+number rows; honest design-study disclosure at order point" },
+    "detail_density": { "score": 9, "max": 10, "evidence": "audit grain/cursor pass; LED seam indices, certificate note, order render cap, custom 404" },
+    "responsive": { "score": 9, "max": 10, "evidence": "audit overflow pass all breakpoints; 4 unidentified sub-44px targets remain (warning)" },
+    "technical_hygiene": { "score": 5, "max": 5, "evidence": "console clean, all routes static, fonts self-hosted, tailwind-merge scale bug fixed" }
+  }
+}

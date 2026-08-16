@@ -1,0 +1,16 @@
+{
+  "round": 1,
+  "total": 78,
+  "gate": "FAIL",
+  "dimensions": {
+    "typographic_craft": { "score": 12, "max": 15, "evidence": "desktop--fold: Satoshi 300 designation + LED values distinctive; audit warning: h1 node computes 16px (size sits on inner span), metrics on wrong element" },
+    "spatial_system": { "score": 12, "max": 15, "evidence": "desktop--full: flagship svh rows balloon the document to 16088px; section rhythm otherwise oscillates as specced" },
+    "colour_contrast": { "score": 6, "max": 10, "evidence": "audit.json color.contrast: 11 pairs below AA — font-led index/label spans at #6E7681 on #0E0F11 (4.17:1)" },
+    "layout_ambition": { "score": 12, "max": 15, "evidence": "observations 2: four sections break the centered stack; hero split + pinned story + 2-1-1 + 6/4 inverse" },
+    "motion_craft": { "score": 8, "max": 10, "evidence": "story rail + parallax + lenis; desktop--full voids show reveal fragility under capture" },
+    "content_copy": { "score": 9, "max": 10, "evidence": "audit copy.banned-words pass; decision+number rows consistent" },
+    "detail_density": { "score": 9, "max": 10, "evidence": "audit detail.grain 0.04 soft-light pass, cursor pass; LED indices, seam numerals, certificate note" },
+    "responsive": { "score": 6, "max": 10, "evidence": "audit criticals: overflow tablet 776>768 and mobile 398>390 (glow divs); 7 touch targets under 44px" },
+    "technical_hygiene": { "score": 4, "max": 5, "evidence": "console clean, static build, fonts self-hosted; criticals exist elsewhere" }
+  }
+}

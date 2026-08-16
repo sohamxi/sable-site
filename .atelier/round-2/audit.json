@@ -1,0 +1,209 @@
+{
+  "url": "http://localhost:3210",
+  "timestamp": "2026-08-14T07:44:05.468Z",
+  "counts": {
+    "critical": 1,
+    "warning": 2,
+    "pass": 12
+  },
+  "gate": "AUDIT FAIL",
+  "findings": [
+    {
+      "level": "pass",
+      "check": "console",
+      "detail": "No console errors",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.desktop",
+      "detail": "No horizontal overflow at 1440px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "typography.banned-font",
+      "detail": "Fonts in use: satoshi, handjet, geistmono",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "typography.scale",
+      "detail": "h1 is 13.41x body",
+      "evidence": null
+    },
+    {
+      "level": "critical",
+      "check": "color.contrast",
+      "detail": "2 text/background pair(s) below WCAG AA",
+      "evidence": [
+        {
+          "selector": "a.inline-flex.items-center",
+          "text": "Buy SB-01$349",
+          "ratio": 1.03,
+          "required": 4.5,
+          "size": 16,
+          "color": "rgb(22, 19, 10)",
+          "background": "rgb(14, 15, 17)"
+        },
+        {
+          "selector": "span.tnum.font-mono",
+          "text": "$349",
+          "ratio": 1.03,
+          "required": 4.5,
+          "size": 14.4,
+          "color": "rgb(22, 19, 10)",
+          "background": "rgb(14, 15, 17)"
+        }
+      ]
+    },
+    {
+      "level": "warning",
+      "check": "color.ramp",
+      "detail": "Only 7 distinct opaque colours rendered. A full neutral ramp usually yields 10+.",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "copy.banned-words",
+      "detail": "No banned copy words",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "a11y.h1",
+      "detail": "Exactly one h1",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "a11y.focus",
+      "detail": "Focus styles present",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.grain",
+      "detail": "Grain present at 0.04 (soft-light)",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.cursor",
+      "detail": "Custom cursor overlay present",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.tablet",
+      "detail": "No horizontal overflow at 768px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "responsive.overflow.mobile",
+      "detail": "No horizontal overflow at 390px",
+      "evidence": null
+    },
+    {
+      "level": "pass",
+      "check": "detail.cursor.touch",
+      "detail": "Custom cursor correctly absent on touch",
+      "evidence": null
+    },
+    {
+      "level": "warning",
+      "check": "a11y.touch-targets",
+      "detail": "5 target(s) under 44x44px on mobile",
+      "evidence": null
+    }
+  ],
+  "raw": {
+    "fonts": [
+      "satoshi",
+      "handjet",
+      "geistmono"
+    ],
+    "headings": [
+      {
+        "level": 1,
+        "text": "SB-567890678901Earphones, measured.",
+        "fontSize": 179.52,
+        "lineHeight": "161.568px",
+        "letterSpacing": "-3.5904px"
+      },
+      {
+        "level": 2,
+        "text": "Sealed. Cancelled. Certified.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 3,
+        "text": "Quiet you can verify",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Sized for the low end",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Weight the ear ignores",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Two days between docks",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 3,
+        "text": "Close to the wire",
+        "fontSize": 31.968,
+        "lineHeight": "35.1648px",
+        "letterSpacing": "-0.31968px"
+      },
+      {
+        "level": 2,
+        "text": "Four instruments. One discipline.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 2,
+        "text": "Every unit measured. No golden samples.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      },
+      {
+        "level": 2,
+        "text": "SB-01, from the line to you.",
+        "fontSize": 75.744,
+        "lineHeight": "77.2589px",
+        "letterSpacing": "-1.51488px"
+      }
+    ],
+    "distinctColors": 7,
+    "landmarks": {
+      "header": true,
+      "nav": true,
+      "main": true,
+      "footer": true,
+      "sections": 5,
+      "skipLink": true
+    }
+  }
+}

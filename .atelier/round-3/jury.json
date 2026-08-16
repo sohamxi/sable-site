@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "judge": "ollama",
+      "ok": false,
+      "error": "404 {\"error\":\"model 'qwen2.5vl:7b' not found\"} — is \"qwen2.5vl:7b\" pulled? Try: ollama pull qwen2.5vl:7b"
+    }
+  ],
+  "timestamp": "2026-08-14T08:01:16.465Z"
+}
