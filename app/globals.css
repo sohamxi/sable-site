@@ -202,3 +202,33 @@
     animation: marquee-x 46s linear infinite;
   }
 }
+
+/* ── Journey resolve: the film clips into the card's media window and the
+   spec panel grows directly beneath it, so the two read as one object.
+   vw/svh (not %) keep the clip box and the panel on the same reference. */
+.sable-journey {
+  --card-w: min(560px, 88vw);
+  --card-media-h: calc(var(--card-w) * 0.5625);
+  --card-panel-h: 268px;
+  --card-top: calc((100svh - var(--card-media-h) - var(--card-panel-h)) / 2);
+  --card-x: calc((100vw - var(--card-w)) / 2);
+}
+
+@media (max-width: 640px) {
+  .sable-journey {
+    --card-panel-h: 296px;
+  }
+}
+
+.sable-journey .journey-clipped {
+  clip-path: inset(
+    var(--card-top) var(--card-x)
+    calc(100svh - var(--card-top) - var(--card-media-h)) var(--card-x)
+  );
+}
+
+.sable-journey .journey-panel {
+  top: calc(var(--card-top) + var(--card-media-h));
+  left: var(--card-x);
+  width: var(--card-w);
+}

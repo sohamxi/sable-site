@@ -46,11 +46,18 @@ const CHAPTERS = [
   {
     index: "04",
     label: "THE QUIET",
-    line: "Then most of it is simply gone.",
+    line: "Then he takes it out.",
     stat: "42 dB",
     note: "attenuation at 1 kHz, worn",
-    at: [0.78, 0.94] as const,
+    at: [0.78, 0.92] as const,
   },
+];
+
+const SPECS: [string, string][] = [
+  ["42 dB", "attenuation at 1 kHz, worn"],
+  ["11.2 mm", "driver, sub-40 Hz"],
+  ["6.1 g", "per bud"],
+  ["32 h", "with case"],
 ];
 
 /* Each chapter clears the frame before the next arrives: the windows sit
@@ -72,10 +79,12 @@ function useChapterOpacity(p: MotionValue<number>, at: readonly [number, number]
 
 /**
  * The product journey, performed by scrolling: a 126-frame scrub of four
- * crossfaded shots (the bud seating, the signal travelling the canal, a
- * Bengaluru hyperlapse for the cancelling loop, and a dolly-zoom resolve),
- * chaptered in copy and landing on the product card.
- * Reduced motion / no JS: the resolve frame plus the full card, static.
+ * crossfaded shots (he seats the bud, the signal travels the canal, a
+ * Bengaluru hyperlapse for the cancelling loop, then he takes it out),
+ * chaptered in copy. On resolve the footage does not sit behind a card:
+ * it is clipped down into the card's own media window, and the spec panel
+ * grows directly beneath it, so the film becomes the product card.
+ * Reduced motion / no JS: the resolved layout, static.
  */
 export function CalibrationScrub({
   price,
@@ -129,7 +138,7 @@ export function CalibrationScrub({
         setReady(true);
         draw(0);
       };
-      img.src = frameSrc(FRAMES - 6);
+      img.src = frameSrc(FRAMES - 4);
       return;
     }
     const list: HTMLImageElement[] = [];
@@ -183,29 +192,39 @@ export function CalibrationScrub({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  return (
-    <div ref={wrap} className="relative mt-16 h-[520vh]">
-      {/* Trips the resolve once the journey is ~82% run. */}
-      <div ref={sentinel} aria-hidden className="absolute top-[82%] h-px w-full" />
-      <div className="sticky top-0 h-[100svh] overflow-hidden">
-        <canvas ref={canvas} aria-hidden className="absolute inset-0 h-full w-full" />
-        {!ready && <div className="absolute inset-0 bg-surface" aria-hidden />}
+  const shown = reduced || resolved;
 
-        {/* grounding vignette so copy always has contrast */}
+  return (
+    <div ref={wrap} className="sable-journey relative mt-16 h-[520vh]">
+      {/* Trips the resolve as the last shot lands. */}
+      <div ref={sentinel} aria-hidden className="absolute top-[94%] h-px w-full" />
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
+        {/* The film. On resolve it is clipped into the card's media window
+            rather than being covered by a floating panel. */}
+        <div
+          className={`absolute inset-0 transition-[clip-path] duration-[900ms] ease-[var(--ease-luxe)] ${
+            shown ? "journey-clipped" : ""
+          }`}
+        >
+          <canvas ref={canvas} aria-hidden className="h-full w-full" />
+          {!ready && <div className="absolute inset-0 bg-surface" aria-hidden />}
+        </div>
+
+        {/* grounding vignette, retired once the card forms */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(to_top,rgba(14,15,17,0.92)_0%,rgba(14,15,17,0.35)_38%,transparent_70%)]"
-        />
-        <div
-          aria-hidden
-          className={`absolute inset-0 bg-canvas transition-opacity duration-700 ease-[var(--ease-luxe)] ${
-            reduced || resolved ? "opacity-[0.88]" : "opacity-0"
+          className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(14,15,17,0.92)_0%,rgba(14,15,17,0.35)_38%,transparent_70%)] transition-opacity duration-700 ${
+            shown ? "opacity-0" : "opacity-100"
           }`}
         />
 
         {/* chapter copy */}
         {!reduced && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0">
+          <div
+            className={`pointer-events-none absolute inset-x-0 bottom-0 transition-opacity duration-500 ${
+              resolved ? "opacity-0" : "opacity-100"
+            }`}
+          >
             <div className="mx-auto w-full max-w-[1200px] px-6 pb-16 lg:px-8 lg:pb-20">
               <div className="relative h-[8.5rem] sm:h-[7.5rem]">
                 {CHAPTERS.map((ch, i) => (
@@ -233,36 +252,24 @@ export function CalibrationScrub({
           </div>
         )}
 
-        {/* the resolve: product card */}
+        {/* The panel grows directly under the clipped film: one object. */}
         <div
-          className={`absolute inset-0 flex items-center justify-center px-6 transition-[opacity,transform] duration-700 ease-[var(--ease-luxe)] ${
-            reduced || resolved
-              ? "translate-y-0 opacity-100"
-              : "pointer-events-none translate-y-8 opacity-0"
+          className={`journey-panel absolute border-x border-b border-line-strong bg-raised transition-[opacity,transform] duration-[900ms] ease-[var(--ease-luxe)] ${
+            shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
           }`}
         >
-          {/* Near-solid: the resolve frame carries a bright rim light and a
-              translucent card loses its numbers against it. */}
-          <div className="w-full max-w-[560px] border border-line-strong bg-raised/95 p-7 backdrop-blur-xl lg:p-9">
+          <div className="px-6 pt-5 pb-6 lg:px-7">
             <div className="flex items-baseline justify-between gap-4">
               <span className="font-mono text-step-n1 tracking-[0.2em] text-ink/55 uppercase">
-                SB-01
+                SB-01 · Earphones, measured.
               </span>
               <span className="font-led text-step-1 leading-none text-accent">{price}</span>
             </div>
-            <p className="mt-5 font-display text-step-3 leading-[1.05] font-medium tracking-[-0.02em] text-ink">
-              Earphones, measured.
-            </p>
-            <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-5">
-              {[
-                ["42 dB", "attenuation at 1 kHz, worn"],
-                ["11.2 mm", "driver, sub-40 Hz"],
-                ["6.1 g", "per bud"],
-                ["32 h", "with case"],
-              ].map(([v, n]) => (
-                <div key={v} className="border-t border-line pt-3">
+            <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4">
+              {SPECS.map(([v, n]) => (
+                <div key={v} className="border-t border-line pt-2.5">
                   <dd className="tnum font-led text-step-1 leading-none text-ink">{v}</dd>
-                  <dt className="mt-1.5 font-mono text-[0.7rem] tracking-[0.08em] text-ink/50 uppercase">
+                  <dt className="mt-1 font-mono text-[0.68rem] tracking-[0.08em] text-ink/50 uppercase">
                     {n}
                   </dt>
                 </div>
@@ -270,7 +277,7 @@ export function CalibrationScrub({
             </dl>
             <a
               href={buyHref}
-              className="mt-8 flex h-12 w-full items-center justify-center rounded-full bg-accent font-medium text-accent-fg transition-colors duration-300 hover:bg-accent-hover"
+              className="mt-6 flex h-12 w-full items-center justify-center rounded-full bg-accent font-medium text-accent-fg transition-colors duration-300 hover:bg-accent-hover"
             >
               Buy SB-01 {price}
             </a>
@@ -279,7 +286,12 @@ export function CalibrationScrub({
 
         {/* journey rail */}
         {!reduced && (
-          <div aria-hidden className="absolute inset-x-0 bottom-0">
+          <div
+            aria-hidden
+            className={`absolute inset-x-0 bottom-0 transition-opacity duration-500 ${
+              resolved ? "opacity-0" : "opacity-100"
+            }`}
+          >
             <div className="relative mx-auto w-full max-w-[1200px] px-6 lg:px-8">
               <div className="relative h-px w-full bg-line-strong">
                 <motion.div
