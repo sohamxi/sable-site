@@ -186,11 +186,20 @@ export function CalibrationScrub({
     draw(i);
   });
 
+  /* Once the card forms, hold the hero frame: scroll events stop firing
+     past progress 1, and the media window should show the product rather
+     than whatever frame the sweep happened to stop on. */
   useEffect(() => {
-    const onResize = () => draw(0);
+    if (!resolved) return;
+    const id = window.setTimeout(() => draw(FRAMES - 1), 60);
+    return () => window.clearTimeout(id);
+  }, [resolved]);
+
+  useEffect(() => {
+    const onResize = () => draw(resolved ? FRAMES - 1 : 0);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, [resolved]);
 
   const shown = reduced || resolved;
 
