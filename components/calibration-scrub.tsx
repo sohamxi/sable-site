@@ -96,10 +96,24 @@ export function CalibrationScrub({
   });
 
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  /* Footage dims and the card assembles over the last sixth. */
-  const scrimOpacity = useTransform(scrollYProgress, [0.82, 0.95], [0, 0.88], { clamp: true });
-  const cardOpacity = useTransform(scrollYProgress, [0.86, 0.95], [0, 1], { clamp: true });
-  const cardY = useTransform(scrollYProgress, [0.86, 0.97], [40, 0], { clamp: true });
+
+  /* The resolve is latched by an observer rather than mapped from scroll
+     progress: past progress 1 the scroll-linked values drop back to their
+     start, which blanked the card while it was still on screen. */
+  const [resolved, setResolved] = useState(false);
+  const sentinel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = sentinel.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setResolved(entry.isIntersecting || entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const o1 = useChapterOpacity(scrollYProgress, CHAPTERS[0].at);
   const o2 = useChapterOpacity(scrollYProgress, CHAPTERS[1].at);
@@ -171,6 +185,8 @@ export function CalibrationScrub({
 
   return (
     <div ref={wrap} className="relative mt-16 h-[520vh]">
+      {/* Trips the resolve once the journey is ~82% run. */}
+      <div ref={sentinel} aria-hidden className="absolute top-[82%] h-px w-full" />
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <canvas ref={canvas} aria-hidden className="absolute inset-0 h-full w-full" />
         {!ready && <div className="absolute inset-0 bg-surface" aria-hidden />}
@@ -180,10 +196,11 @@ export function CalibrationScrub({
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(to_top,rgba(14,15,17,0.92)_0%,rgba(14,15,17,0.35)_38%,transparent_70%)]"
         />
-        <motion.div
+        <div
           aria-hidden
-          className="absolute inset-0 bg-canvas"
-          style={reduced ? { opacity: 0.72 } : { opacity: scrimOpacity }}
+          className={`absolute inset-0 bg-canvas transition-opacity duration-700 ease-[var(--ease-luxe)] ${
+            reduced || resolved ? "opacity-[0.88]" : "opacity-0"
+          }`}
         />
 
         {/* chapter copy */}
@@ -217,13 +234,12 @@ export function CalibrationScrub({
         )}
 
         {/* the resolve: product card */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center px-6"
-          style={
-            reduced
-              ? undefined
-              : { opacity: cardOpacity, y: cardY, pointerEvents: "none" }
-          }
+        <div
+          className={`absolute inset-0 flex items-center justify-center px-6 transition-[opacity,transform] duration-700 ease-[var(--ease-luxe)] ${
+            reduced || resolved
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-8 opacity-0"
+          }`}
         >
           {/* Near-solid: the resolve frame carries a bright rim light and a
               translucent card loses its numbers against it. */}
@@ -254,12 +270,12 @@ export function CalibrationScrub({
             </dl>
             <a
               href={buyHref}
-              className="pointer-events-auto mt-8 flex h-12 w-full items-center justify-center rounded-full bg-accent font-medium text-accent-fg transition-colors duration-300 hover:bg-accent-hover"
+              className="mt-8 flex h-12 w-full items-center justify-center rounded-full bg-accent font-medium text-accent-fg transition-colors duration-300 hover:bg-accent-hover"
             >
               Buy SB-01 {price}
             </a>
           </div>
-        </motion.div>
+        </div>
 
         {/* journey rail */}
         {!reduced && (
