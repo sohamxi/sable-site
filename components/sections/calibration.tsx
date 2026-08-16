@@ -46,12 +46,11 @@ export function Calibration() {
         </div>
       </Container>
 
-      {/* The calibration run: scroll performs the sweep. */}
+      {/* The journey: scroll carries the bud from the ear to the street
+          and lands on the product. */}
       <CalibrationScrub
-        title={c.plot.title}
-        meta={c.plot.meta}
-        band={c.plot.band}
-        caption={c.plot.caption}
+        price={site.nav.buyCompact.price}
+        buyHref={site.nav.buyCompact.href}
       />
     </Section>
   );
